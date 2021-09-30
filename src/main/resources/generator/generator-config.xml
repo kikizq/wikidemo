@@ -40,8 +40,8 @@
                              targetPackage="com.kiki.wiki.mapper"
                              type="XMLMAPPER"/>
 
-        <table tableName="test" domainObjectName="Test"/>
-        <!--<table tableName="ebook"/>-->
+        <!--<table tableName="test" domainObjectName="Test"/>-->
+        <table tableName="ebook"/>
         <!--<table tableName="category"/>-->
         <!--<table tableName="doc"/>-->
         <!--<table tableName="content"/>-->
