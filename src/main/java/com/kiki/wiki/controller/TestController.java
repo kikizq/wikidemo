@@ -17,6 +17,7 @@ import java.util.List;
  * @desc
  */
 @RestController
+@RequestMapping("/demo")
 public class TestController {
 
     @Value("${test.hello:TEST}")
@@ -32,7 +33,7 @@ public class TestController {
         return "hello ," + testHello;
     }
 
-    @GetMapping("/test/list")
+    @GetMapping("/list")
     public List<Test> list(){
         return testService.list();
     }
