@@ -1,7 +1,8 @@
 package com.kiki.wiki.controller;
 
-import com.kiki.wiki.domain.Ebook;
+import com.kiki.wiki.req.EbookReq;
 import com.kiki.wiki.resp.CommonResp;
+import com.kiki.wiki.resp.EbookResp;
 import com.kiki.wiki.service.EbookService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +25,9 @@ public class EbookController {
     private EbookService ebookService;
 
     @GetMapping("/list")
-    public CommonResp list(){
-        CommonResp<List<Ebook>> resp =new CommonResp<>();
-        List<Ebook> list = ebookService.list();
+    public CommonResp list(EbookReq ebookReq){
+        CommonResp<List<EbookResp>> resp =new CommonResp<>();
+        List<EbookResp> list = ebookService.list(ebookReq);
         resp.setContent(list);
         return resp;
     }
