@@ -7,6 +7,7 @@ import com.kiki.wiki.req.EbookReq;
 import com.kiki.wiki.resp.EbookResp;
 import com.kiki.wiki.util.CopyUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -20,10 +21,13 @@ import java.util.List;
 public class EbookService {
     @Resource
     private EbookMapper ebookMapper;
-    public List<EbookResp> list(EbookReq ebookReq){
+
+    public List<EbookResp> list(EbookReq ebookReq) {
         EbookExample ebookExample = new EbookExample();
-        EbookExample.Criteria  criteria = ebookExample.createCriteria();
-        criteria.andNameLike("%"+ebookReq.getName()+"%");
+        EbookExample.Criteria criteria = ebookExample.createCriteria();
+        if (!ObjectUtils.isEmpty(ebookReq.getName())) {
+            criteria.andNameLike("%" + ebookReq.getName() + "%");
+        }
         List<Ebook> ebookList = ebookMapper.selectByExample(ebookExample);
 //        List<EbookResp> ebookRespList = new ArrayList<>();
         //列表复制
