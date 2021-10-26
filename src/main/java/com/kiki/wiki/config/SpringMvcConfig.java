@@ -1,29 +1,29 @@
-package com.kiki.wiki.config;
-
-import com.kiki.wiki.interceptor.LogInterceptor;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import javax.annotation.Resource;
-
-/**
- * @author qizhang
- * @date 2021/10/21
- * @desc
- */
-@Configuration
-public class SpringMvcConfig implements WebMvcConfigurer {
+//package com.kiki.wiki.config;
+//
+//import com.kiki.wiki.interceptor.LogInterceptor;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+//import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+//
+//import javax.annotation.Resource;
+//
+///**
+// * @author qizhang
+// * @date 2021/10/21
+// * @desc
+// */
+//@Configuration
+//public class SpringMvcConfig implements WebMvcConfigurer {
 //    @Resource
 //    LoginInterceptor loginInterceptor;
 //
 //    @Resource
 //    ActionInterceptor actionInterceptor;
 //
-    @Resource
-    LogInterceptor logInterceptor;
-
-    public void addInterceptors(InterceptorRegistry registry) {
+//    @Resource
+//    LogInterceptor logInterceptor;
+//
+//    public void addInterceptors(InterceptorRegistry registry) {
 //        registry.addInterceptor(loginInterceptor)
 //                .addPathPatterns("/**")
 //                .excludePathPatterns(
@@ -43,7 +43,7 @@ public class SpringMvcConfig implements WebMvcConfigurer {
 //                        "/*/save",
 //                        "/*/delete/**",
 //                        "/*/reset-password");
-        registry.addInterceptor(logInterceptor).addPathPatterns("/**")
-                .excludePathPatterns("/login");
-    }
-}
+//        registry.addInterceptor(logInterceptor).addPathPatterns("/**")
+//                .excludePathPatterns("/login");
+//    }
+//}
