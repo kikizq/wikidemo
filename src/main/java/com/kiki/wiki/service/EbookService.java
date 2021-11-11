@@ -1,5 +1,6 @@
 package com.kiki.wiki.service;
 
+import com.github.pagehelper.PageHelper;
 import com.kiki.wiki.domain.Ebook;
 import com.kiki.wiki.domain.EbookExample;
 import com.kiki.wiki.mapper.EbookMapper;
@@ -23,11 +24,13 @@ public class EbookService {
     private EbookMapper ebookMapper;
 
     public List<EbookResp> list(EbookReq ebookReq) {
+
         EbookExample ebookExample = new EbookExample();
         EbookExample.Criteria criteria = ebookExample.createCriteria();
         if (!ObjectUtils.isEmpty(ebookReq.getName())) {
             criteria.andNameLike("%" + ebookReq.getName() + "%");
         }
+        PageHelper.startPage(1,3);
         List<Ebook> ebookList = ebookMapper.selectByExample(ebookExample);
 //        List<EbookResp> ebookRespList = new ArrayList<>();
         //列表复制
