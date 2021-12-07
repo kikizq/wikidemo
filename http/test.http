@@ -17,5 +17,5 @@ id=99&content=new-element
 
 ###
 
-GET http://localhost:8881/ebook/list?name=java
+GET http://localhost:8881/ebook/list?page=1&size=2
 ###
