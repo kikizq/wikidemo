@@ -216,7 +216,13 @@
                 modalVisible.value = true;
                 ebook.value = {};
             };
-            const handleDelete = (id: number) => {
+
+            /**
+             * 删除
+             */
+
+            const handleDelete = (id: any) => {
+                console.log(id)
                 axios.delete("/ebook/delete/" + id).then((response) => {
                     const data = response.data; // data = commonResp
                     if (data.success) {
