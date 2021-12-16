@@ -149,7 +149,7 @@
                     params: {
                         page: params.page,
                         size: params.size,
-                        // name: param.value.name
+                        name: param.value.name
                     }
                 }).then((response) => {
                     loading.value = false;
