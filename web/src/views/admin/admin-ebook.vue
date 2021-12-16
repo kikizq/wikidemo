@@ -30,7 +30,7 @@
                     @change="handleTableChange"
             >
                 <template #cover="{ text: cover }">
-                    <img v-if="cover" :src="cover" alt="avatar" />
+                    <img v-if="cover" :src="cover" alt="avatar"/>
                 </template>
                 <template v-slot:category="{ text, record }">
                     <span>{{ getCategoryName(record.category1Id) }} / {{ getCategoryName(record.category2Id) }}</span>
@@ -69,10 +69,10 @@
     >
         <a-form :model="ebook" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }">
             <a-form-item label="封面">
-                <a-input v-model:value="ebook.cover" />
+                <a-input v-model:value="ebook.cover"/>
             </a-form-item>
             <a-form-item label="名称">
-                <a-input v-model:value="ebook.name" />
+                <a-input v-model:value="ebook.name"/>
             </a-form-item>
             <a-form-item label="分类">
                 <a-cascader
@@ -82,17 +82,18 @@
                 />
             </a-form-item>
             <a-form-item label="描述">
-                <a-input v-model:value="ebook.description" type="textarea" />
+                <a-input v-model:value="ebook.description" type="textarea"/>
             </a-form-item>
         </a-form>
     </a-modal>
 </template>
 
 <script lang="ts">
-    import { defineComponent, onMounted, ref } from 'vue';
+    import {defineComponent, onMounted, ref} from 'vue';
     import axios from 'axios';
-    import { message } from 'ant-design-vue';
+    import {message} from 'ant-design-vue';
     import {Tool} from "@/util/tool";
+
     export default defineComponent({
         name: 'AdminEbook',
         setup() {
@@ -134,7 +135,7 @@
                 {
                     title: 'Action',
                     key: 'action',
-                    slots: { customRender: 'action' }
+                    slots: {customRender: 'action'}
                 }
             ];
             /**
@@ -183,22 +184,26 @@
             const modalLoading = ref(false);
             const handleModalOk = () => {
                 modalLoading.value = true;
-                ebook.value.category1Id = categoryIds.value[0];
-                ebook.value.category2Id = categoryIds.value[1];
-                axios.post("/ebook/save", ebook.value).then((response) => {
+                // ebook.value.category1Id = categoryIds.value[0];
+                // ebook.value.category2Id = categoryIds.value[1];
+                // axios.post("/ebook/save", ebook.value).then((response) => {
+                //     modalLoading.value = false;
+                //     const data = response.data; // data = commonResp
+                //     if (data.success) {
+                //         modalVisible.value = false;
+                //         // 重新加载列表
+                //         handleQuery({
+                //             page: pagination.value.current,
+                //             size: pagination.value.pageSize,
+                //         });
+                //     } else {
+                //         message.error(data.message);
+                //     }
+                // });
+                setTimeout(() => {
                     modalLoading.value = false;
-                    const data = response.data; // data = commonResp
-                    if (data.success) {
-                        modalVisible.value = false;
-                        // 重新加载列表
-                        handleQuery({
-                            page: pagination.value.current,
-                            size: pagination.value.pageSize,
-                        });
-                    } else {
-                        message.error(data.message);
-                    }
-                });
+                    modalVisible.value = false
+                }, 2000)
             };
             /**
              * 编辑
@@ -229,7 +234,7 @@
                     }
                 });
             };
-            const level1 =  ref();
+            const level1 = ref();
             let categorys: any;
             /**
              * 查询所有分类
