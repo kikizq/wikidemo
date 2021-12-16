@@ -9,6 +9,7 @@ import com.kiki.wiki.req.EbookQueryReq;
 import com.kiki.wiki.req.EbookSaveReq;
 import com.kiki.wiki.resp.PageResp;
 import com.kiki.wiki.util.CopyUtil;
+import com.kiki.wiki.util.SnowFlake;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -22,8 +23,12 @@ import java.util.List;
  */
 @Service
 public class EbookService {
+
     @Resource
     private EbookMapper ebookMapper;
+
+    @Resource
+    private SnowFlake snowFlake;
 
     public PageResp<com.kiki.wiki.resp.EbookQueryReq> list(EbookQueryReq ebookQueryReq) {
 
@@ -56,6 +61,7 @@ public class EbookService {
     public void save(EbookSaveReq req) {
         Ebook ebook = CopyUtil.copy(req, Ebook.class);
         if (ObjectUtils.isEmpty(req.getId())) {
+            ebook.setId(snowFlake.nextId());
             ebookMapper.insert(ebook);
         } else {
             ebookMapper.updateByPrimaryKey(ebook);
