@@ -1,13 +1,11 @@
 package com.kiki.wiki.controller;
 
-import com.kiki.wiki.req.EbookReq;
+import com.kiki.wiki.req.EbookQueryReq;
+import com.kiki.wiki.req.EbookSaveReq;
 import com.kiki.wiki.resp.CommonResp;
-import com.kiki.wiki.resp.EbookResp;
 import com.kiki.wiki.resp.PageResp;
 import com.kiki.wiki.service.EbookService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -25,10 +23,17 @@ public class EbookController {
     private EbookService ebookService;
 
     @GetMapping("/list")
-    public CommonResp list(EbookReq ebookReq){
-        CommonResp<PageResp<EbookResp>> resp =new CommonResp<>();
-        PageResp<EbookResp> list = ebookService.list(ebookReq);
+    public CommonResp list(EbookQueryReq ebookQueryReq){
+        CommonResp<PageResp<com.kiki.wiki.resp.EbookQueryReq>> resp =new CommonResp<>();
+        PageResp<com.kiki.wiki.resp.EbookQueryReq> list = ebookService.list(ebookQueryReq);
         resp.setContent(list);
+        return resp;
+    }
+
+    @PostMapping("/save")
+    public CommonResp save(@RequestBody EbookSaveReq req){
+        CommonResp resp =new CommonResp<>();
+        ebookService.save(req);
         return resp;
     }
 }

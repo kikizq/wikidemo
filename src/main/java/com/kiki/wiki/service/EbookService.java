@@ -5,8 +5,8 @@ import com.github.pagehelper.PageInfo;
 import com.kiki.wiki.domain.Ebook;
 import com.kiki.wiki.domain.EbookExample;
 import com.kiki.wiki.mapper.EbookMapper;
-import com.kiki.wiki.req.EbookReq;
-import com.kiki.wiki.resp.EbookResp;
+import com.kiki.wiki.req.EbookQueryReq;
+import com.kiki.wiki.req.EbookSaveReq;
 import com.kiki.wiki.resp.PageResp;
 import com.kiki.wiki.util.CopyUtil;
 import org.springframework.stereotype.Service;
@@ -25,30 +25,43 @@ public class EbookService {
     @Resource
     private EbookMapper ebookMapper;
 
-    public PageResp<EbookResp> list(EbookReq ebookReq) {
+    public PageResp<com.kiki.wiki.resp.EbookQueryReq> list(EbookQueryReq ebookQueryReq) {
 
         EbookExample ebookExample = new EbookExample();
         EbookExample.Criteria criteria = ebookExample.createCriteria();
-        if (!ObjectUtils.isEmpty(ebookReq.getName())) {
-            criteria.andNameLike("%" + ebookReq.getName() + "%");
+        if (!ObjectUtils.isEmpty(ebookQueryReq.getName())) {
+            criteria.andNameLike("%" + ebookQueryReq.getName() + "%");
         }
-        PageHelper.startPage(ebookReq.getPage(), ebookReq.getSize());
+        PageHelper.startPage(ebookQueryReq.getPage(), ebookQueryReq.getSize());
         List<Ebook> ebookList = ebookMapper.selectByExample(ebookExample);
-//        List<EbookResp> ebookRespList = new ArrayList<>();
+//        List<EbookQueryReq> ebookQueryReqList = new ArrayList<>();
         //列表复制
 
         PageInfo<Ebook> pageInfo = new PageInfo<>(ebookList);
-        List<EbookResp> ebookRespList = CopyUtil.copyList(ebookList, EbookResp.class);
+        List<com.kiki.wiki.resp.EbookQueryReq> ebookQueryReqList = CopyUtil.copyList(ebookList, com.kiki.wiki.resp.EbookQueryReq.class);
 //        for (Ebook ebook:ebookList){
-//            EbookResp ebookResp = new EbookResp();
+//            EbookQueryReq ebookResp = new EbookQueryReq();
 //            BeanUtils.copyProperties(ebook,ebookResp);
-//            ebookRespList.add(ebookResp);
+//            ebookQueryReqList.add(ebookResp);
 
 //        }
 
-        PageResp<EbookResp> pageResp = new PageResp();
+        PageResp<com.kiki.wiki.resp.EbookQueryReq> pageResp = new PageResp();
         pageResp.setTotal(pageInfo.getTotal());
-        pageResp.setList(ebookRespList);
+        pageResp.setList(ebookQueryReqList);
         return pageResp;
     }
+
+
+    public void save(EbookSaveReq req) {
+        Ebook ebook = CopyUtil.copy(req, Ebook.class);
+        if (ObjectUtils.isEmpty(req.getId())) {
+            ebookMapper.insert(ebook);
+        } else {
+            ebookMapper.updateByPrimaryKey(ebook);
+        }
+
+    }
+
+
 }

@@ -1,6 +1,6 @@
-package com.kiki.wiki.resp;
+package com.kiki.wiki.req;
 
-public class EbookResp {
+public class EbookSaveReq extends PageReq{
     private Long id;
 
     private String name;

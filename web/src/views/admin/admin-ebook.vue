@@ -186,24 +186,20 @@
                 modalLoading.value = true;
                 // ebook.value.category1Id = categoryIds.value[0];
                 // ebook.value.category2Id = categoryIds.value[1];
-                // axios.post("/ebook/save", ebook.value).then((response) => {
-                //     modalLoading.value = false;
-                //     const data = response.data; // data = commonResp
-                //     if (data.success) {
-                //         modalVisible.value = false;
-                //         // 重新加载列表
-                //         handleQuery({
-                //             page: pagination.value.current,
-                //             size: pagination.value.pageSize,
-                //         });
-                //     } else {
-                //         message.error(data.message);
-                //     }
-                // });
-                setTimeout(() => {
+                axios.post("/ebook/save", ebook.value).then((response) => {
                     modalLoading.value = false;
-                    modalVisible.value = false
-                }, 2000)
+                    const data = response.data; // data = commonResp
+                    if (data.success) {
+                        modalVisible.value = false;
+                        // 重新加载列表
+                        handleQuery({
+                            page: pagination.value.current,
+                            size: pagination.value.pageSize,
+                        });
+                    } else {
+                        message.error(data.message);
+                    }
+                });
             };
             /**
              * 编辑
