@@ -17,5 +17,5 @@ id=99&content=new-element
 
 ###
 
-GET http://localhost:8881/ebook/list?page=1&size=2
+GET http://localhost:8881/ebook/list?page=1&size=1001
 ###

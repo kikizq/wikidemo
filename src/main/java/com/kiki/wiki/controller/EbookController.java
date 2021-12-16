@@ -8,6 +8,7 @@ import com.kiki.wiki.service.EbookService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 /**
  * @author qizhang
@@ -23,7 +24,7 @@ public class EbookController {
     private EbookService ebookService;
 
     @GetMapping("/list")
-    public CommonResp list(EbookQueryReq ebookQueryReq){
+    public CommonResp list(@Valid EbookQueryReq ebookQueryReq){
         CommonResp<PageResp<com.kiki.wiki.resp.EbookQueryReq>> resp =new CommonResp<>();
         PageResp<com.kiki.wiki.resp.EbookQueryReq> list = ebookService.list(ebookQueryReq);
         resp.setContent(list);
